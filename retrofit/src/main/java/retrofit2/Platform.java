@@ -69,6 +69,7 @@ class Platform {
   }
 
   @IgnoreJRERequirement // Only classloaded and used on Java 8.
+  //2017年9月9日 to do 深入了解Java再来分析
   static class Java8 extends Platform {
     @Override boolean isDefaultMethod(Method method) {
       return method.isDefault();
@@ -99,7 +100,8 @@ class Platform {
 
     static class MainThreadExecutor implements Executor {
       private final Handler handler = new Handler(Looper.getMainLooper());
-
+      //Android里使用handler来解决线程的并发同步问题
+      
       @Override public void execute(Runnable r) {
         handler.post(r);
       }
